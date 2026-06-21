@@ -6,8 +6,23 @@ __v0_jsx-dev-runtime.ts
 .v0-trash/
 .vercel/
 
-# Environment variables
+# ──────────────────────────────────────────────
+# SECURITY: Environment & Secret files
+# NEVER commit these — they contain API tokens
+# ──────────────────────────────────────────────
+.env
+.env.local
+.env.development
+.env.development.local
+.env.test
+.env.test.local
+.env.production
+.env.production.local
 .env*.local
+.env.*
+*.pem
+*.key
+*.secret
 
 # Common ignores
 node_modules
