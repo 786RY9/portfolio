@@ -1,9 +1,10 @@
 "use client"
 
 import Image from "next/image"
-import { Github, Linkedin, Twitter, Mail, Copy, Check } from "lucide-react"
+import Link from "next/link"
+import { Github, Linkedin, Twitter, Mail, Copy, Check, X, ArrowUpRight } from "lucide-react"
 import { useEffect, useRef, useState, useCallback } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 const ROLES = [
   "Web App Developer",
@@ -15,12 +16,29 @@ const ROLES = [
 
 const EMAIL = "rashidyaseen5484@gmail.com"
 
+const NAV_LINKS = [
+  { label: "About", href: "/#values" },
+  { label: "Skills", href: "/#skills" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Services", href: "/services" },
+  { label: "Blog", href: "/blog" },
+  { label: "Learning Log", href: "/learnings" },
+  { label: "Contact", href: "/#contact" },
+]
+
 export function Hero({ ready = false }: { ready?: boolean }) {
   const stageRef = useRef<HTMLDivElement>(null)
   const circleRef = useRef<HTMLDivElement>(null)
   const [roleIndex, setRoleIndex] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
   const [menuHover, setMenuHover] = useState(false)
   const [copied, setCopied] = useState(false)
+
+  // Lock body scroll when drawer is open
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : ""
+    return () => { document.body.style.overflow = "" }
+  }, [menuOpen])
 
   useEffect(() => {
     const id = setInterval(() => {
@@ -122,9 +140,11 @@ export function Hero({ ready = false }: { ready?: boolean }) {
       {/* Top-left hamburger */}
       <button
         type="button"
-        aria-label="Open menu"
+        aria-label="Open navigation menu"
+        aria-expanded={menuOpen}
         onMouseEnter={() => setMenuHover(true)}
         onMouseLeave={() => setMenuHover(false)}
+        onClick={() => setMenuOpen(true)}
         className="group absolute left-6 top-7 z-30 flex flex-col gap-[7px] py-2"
         data-cursor="menu"
       >
@@ -144,6 +164,9 @@ export function Hero({ ready = false }: { ready?: boolean }) {
           )
         })}
       </button>
+
+      {/* Nav Drawer */}
+      <NavDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* Logo mark RY */}
       <motion.div 
@@ -667,3 +690,96 @@ function InteractiveStarfield() {
   )
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// NavDrawer — full-screen slide-in navigation
+// ─────────────────────────────────────────────────────────────────────────────
+function NavDrawer({ open, onClose }: { open: boolean; onClose: () => void }) {
+  // Close on Escape key
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose() }
+    window.addEventListener("keydown", handler)
+    return () => window.removeEventListener("keydown", handler)
+  }, [onClose])
+
+  return (
+    <AnimatePresence>
+      {open && (
+        <>
+          {/* Backdrop */}
+          <motion.div
+            key="backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+            className="fixed inset-0 z-[60] bg-black/80 backdrop-blur-md"
+            onClick={onClose}
+          />
+
+          {/* Drawer panel */}
+          <motion.nav
+            key="drawer"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed inset-y-0 left-0 z-[70] flex w-full max-w-xs flex-col bg-[#060606] border-r border-white/[0.06] px-8 py-8"
+          >
+            {/* Header */}
+            <div className="mb-12 flex items-center justify-between">
+              <span className="font-serif italic text-2xl text-white">
+                RY<span className="text-[oklch(0.65_0.22_25)]">.</span>
+              </span>
+              <button
+                onClick={onClose}
+                aria-label="Close menu"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition hover:border-white/25 hover:text-white"
+              >
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+
+            {/* Nav links */}
+            <ul className="flex flex-1 flex-col gap-1">
+              {NAV_LINKS.map(({ label, href }, i) => (
+                <motion.li
+                  key={href}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.45, delay: 0.1 + i * 0.055, ease: [0.16, 1, 0.3, 1] }}
+                >
+                  <Link
+                    href={href}
+                    onClick={onClose}
+                    className="group flex items-center justify-between rounded-xl px-4 py-3.5 text-lg font-semibold text-white/70 transition-all hover:bg-white/[0.04] hover:text-white"
+                  >
+                    <span>{label}</span>
+                    <ArrowUpRight className="h-4 w-4 opacity-0 transition-all group-hover:opacity-100 group-hover:text-[oklch(0.65_0.22_25)] group-hover:rotate-45" />
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+
+            {/* Footer */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.55, duration: 0.4 }}
+              className="mt-8 border-t border-white/[0.06] pt-6"
+            >
+              <p className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/20">
+                Rashid Yaseen · Portfolio
+              </p>
+              <a
+                href="mailto:rashidyaseen5484@gmail.com"
+                className="mt-2 block font-mono text-xs text-white/35 transition hover:text-[oklch(0.7_0.18_25)]"
+              >
+                rashidyaseen5484@gmail.com
+              </a>
+            </motion.div>
+          </motion.nav>
+        </>
+      )}
+    </AnimatePresence>
+  )
+}

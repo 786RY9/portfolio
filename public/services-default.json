@@ -1,0 +1,130 @@
+[
+  {
+    "id": "web-dev",
+    "title": "Web App Development",
+    "tagline": "Next.js · FastAPI · Full-Stack",
+    "description": "Performant, scalable web applications built with Next.js, React, and Python backends. From landing pages to complex SaaS platforms.",
+    "icon": "Globe",
+    "features": [
+      "Next.js 16 / React 19",
+      "FastAPI / Django / Flask backends",
+      "PostgreSQL, Redis, Supabase",
+      "SEO optimised & accessible",
+      "CI/CD pipeline included"
+    ],
+    "featured": true,
+    "order": 0
+  },
+  {
+    "id": "flutter",
+    "title": "Flutter Mobile Apps",
+    "tagline": "iOS · Android · Desktop",
+    "description": "Native-quality cross-platform apps from a single codebase — shipped to iOS, Android, and desktop with pixel-perfect UI.",
+    "icon": "Smartphone",
+    "features": [
+      "iOS & Android deployment",
+      "macOS, Windows, Linux",
+      "Riverpod / Bloc state management",
+      "Firebase / Supabase integration",
+      "App Store & Play Store submission"
+    ],
+    "featured": true,
+    "order": 1
+  },
+  {
+    "id": "rag-ai",
+    "title": "RAG & Agentic AI Systems",
+    "tagline": "LLMs · Agents · Automation",
+    "description": "Production-ready AI pipelines — retrieval-augmented generation, autonomous agents, and workflow automation using LangChain, LlamaIndex, and n8n.",
+    "icon": "Bot",
+    "features": [
+      "RAG pipelines with vector DBs",
+      "LangChain / LlamaIndex agents",
+      "n8n / Make.com automation",
+      "OpenAI, Anthropic, local LLMs",
+      "Custom chatbots & assistants"
+    ],
+    "featured": true,
+    "order": 2
+  },
+  {
+    "id": "ml-dl",
+    "title": "Machine & Deep Learning",
+    "tagline": "PyTorch · TensorFlow · Computer Vision · NLP",
+    "description": "End-to-end ML/DL solutions — from data preprocessing and model training to deployment as APIs or edge applications.",
+    "icon": "Brain",
+    "features": [
+      "Custom model training (PyTorch / TF)",
+      "Computer Vision & NLP",
+      "Model fine-tuning (LoRA, QLoRA)",
+      "FastAPI / TorchServe deployment",
+      "MLOps with experiment tracking"
+    ],
+    "featured": false,
+    "order": 3
+  },
+  {
+    "id": "devops",
+    "title": "DevOps & Infrastructure",
+    "tagline": "Docker · Kubernetes · CI/CD · AWS",
+    "description": "Bulletproof infrastructure and automation — containerisation, Kubernetes orchestration, Terraform IaC, and GitHub Actions pipelines.",
+    "icon": "Server",
+    "features": [
+      "Docker & Kubernetes",
+      "Terraform / Ansible IaC",
+      "GitHub Actions CI/CD",
+      "AWS / GCP / DigitalOcean",
+      "Nginx, SSL, monitoring"
+    ],
+    "featured": false,
+    "order": 4
+  },
+  {
+    "id": "cybersecurity",
+    "title": "Cybersecurity & Pentesting",
+    "tagline": "Recon · Web · Network · Reporting",
+    "description": "Professional penetration testing and security hardening — web application, network, and Linux system assessments with detailed reports.",
+    "icon": "Shield",
+    "features": [
+      "Web application pentesting (OWASP)",
+      "Network & infrastructure recon",
+      "Burp Suite, Nmap, Metasploit",
+      "Linux system hardening",
+      "Detailed findings & remediation report"
+    ],
+    "featured": false,
+    "order": 5
+  },
+  {
+    "id": "linux-sysadmin",
+    "title": "Linux System Administration",
+    "tagline": "RHEL · Ubuntu · Hardening · Automation",
+    "description": "Server setup, hardening, and ongoing administration for RHEL, Ubuntu, and Debian systems — from bare metal to cloud VMs.",
+    "icon": "Terminal",
+    "features": [
+      "RHEL / Ubuntu / Debian",
+      "systemd, SELinux, iptables",
+      "Ansible automation",
+      "Backup & disaster recovery",
+      "Performance tuning & monitoring"
+    ],
+    "featured": false,
+    "order": 6
+  },
+  {
+    "id": "wordpress",
+    "title": "WordPress Development",
+    "tagline": "Custom Themes · WooCommerce · SEO",
+    "description": "High-performance WordPress sites with custom themes, WooCommerce stores, and technical SEO — built to load fast and rank well.",
+    "icon": "Layers",
+    "features": [
+      "Custom theme development (PHP)",
+      "WooCommerce stores",
+      "Plugin development & integration",
+      "Core Web Vitals optimisation",
+      "On-page SEO & schema markup"
+    ],
+    "featured": false,
+    "order": 7
+  }
+]

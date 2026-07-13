@@ -6,6 +6,7 @@ import { Hero } from "@/components/hero"
 import { Values } from "@/components/values"
 import { Skills } from "@/components/skills"
 import { Projects } from "@/components/projects"
+import { Services } from "@/components/services"
 import { GithubSection } from "@/components/github-section"
 import { Feedback } from "@/components/feedback"
 import { Contact } from "@/components/contact"
@@ -25,6 +26,7 @@ export default function Page() {
       <Values />
       <Skills />
       <Projects />
+      <Services />
       <GithubSection />
       <Feedback />
       <Contact />

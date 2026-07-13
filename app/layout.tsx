@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Inter, Playfair_Display } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { IntroOverlay } from "@/components/intro-overlay"
+import { Navbar } from "@/components/navbar"
 import "./globals.css"
 
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider"
@@ -40,6 +41,7 @@ export default function RootLayout({
           <IntroOverlay />
           <CustomCursor />
           <ScrollProgress />
+          <Navbar />
           {children}
           {process.env.NODE_ENV === "production" && <Analytics />}
         </SmoothScrollProvider>

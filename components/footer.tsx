@@ -10,6 +10,13 @@ const SOCIALS = [
   { label: "LinkedIn", href: "https://www.linkedin.com/in/rashid-yaseen-7bb729294/" },
   { label: "Twitter / X", href: "https://x.com/ras_yaseen5484" },
   { label: "Instagram", href: "https://www.instagram.com/" },
+  { label: "WhatsApp", href: "https://wa.me/923027530487" },
+]
+
+const NAV_LINKS = [
+  { label: "Blog", href: "/blog" },
+  { label: "Learning Log", href: "/learnings" },
+  { label: "Services", href: "/services" },
 ]
 
 export function Footer() {
@@ -181,9 +188,20 @@ export function Footer() {
                 ))}
               </div>
             </div>
-            <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/20">
-              © {new Date().getFullYear()} Rashid Yaseen
-            </span>
+            <div className="flex items-center gap-6">
+              {NAV_LINKS.map((n) => (
+                <a
+                  key={n.label}
+                  href={n.href}
+                  className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/25 transition-colors hover:text-white/60"
+                >
+                  {n.label}
+                </a>
+              ))}
+              <span className="font-mono text-[9px] uppercase tracking-[0.4em] text-white/20">
+                © {new Date().getFullYear()} Rashid Yaseen
+              </span>
+            </div>
           </div>
 
         </div>
