@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { fetchPost, listPosts } from "@/lib/cms-github"
-import { PostRenderer } from "@/components/admin/PostEditor"
+import { PostRendererWrapper } from "@/components/PostRendererClient"
 import { Calendar, ArrowLeft, Tag } from "lucide-react"
 import type { PartialBlock } from "@blocknote/core"
 
@@ -111,7 +111,7 @@ export default async function BlogPostPage({
 
         {/* BlockNote content */}
         <div className="prose-dark">
-          <PostRenderer content={post.content as PartialBlock[]} />
+          <PostRendererWrapper content={post.content as PartialBlock[]} />
         </div>
 
         {/* Footer */}

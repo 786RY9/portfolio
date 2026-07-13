@@ -1,6 +1,10 @@
 /**
- * The login page has its own minimal layout — no auth check here,
- * that's handled in the page itself. This prevents redirect loops.
+ * Login page gets its own layout that renders ONLY the children,
+ * without the admin sidebar (which would look wrong on the login screen).
+ *
+ * In Next.js App Router, more-specific layouts override parent layouts
+ * for their segment, so this prevents the admin sidebar from showing
+ * on the /admin/login page.
  */
 export default function LoginLayout({
   children,

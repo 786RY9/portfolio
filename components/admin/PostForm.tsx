@@ -2,11 +2,30 @@
 
 import { useState, useCallback } from "react"
 import { useRouter } from "next/navigation"
-import { PostEditor, VideoEmbedPanel } from "./PostEditor"
+import dynamic from "next/dynamic"
 import { Save, Eye, EyeOff, Upload, X, Tag, AlertCircle, Check } from "lucide-react"
 import type { PostType, Post } from "@/lib/cms-types"
 import type { PartialBlock } from "@blocknote/core"
 import slugify from "slugify"
+
+// Dynamic imports with ssr:false prevent BlockNote (which uses window/document)
+// from running during server-side rendering / static build pre-rendering
+const PostEditor = dynamic(
+  () => import("./PostEditor").then((m) => ({ default: m.PostEditor })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-[400px] rounded-xl border border-white/10 bg-[#0d0d0d] flex items-center justify-center">
+        <span className="font-mono text-xs text-white/20 animate-pulse">Loading editor…</span>
+      </div>
+    ),
+  }
+)
+
+const VideoEmbedPanel = dynamic(
+  () => import("./PostEditor").then((m) => ({ default: m.VideoEmbedPanel })),
+  { ssr: false }
+)
 
 interface PostFormProps {
   postType: PostType

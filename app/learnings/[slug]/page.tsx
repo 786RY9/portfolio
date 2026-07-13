@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import Link from "next/link"
 import { fetchPost, listPosts } from "@/lib/cms-github"
-import { PostRenderer } from "@/components/admin/PostEditor"
+import { PostRendererWrapper } from "@/components/PostRendererClient"
 import { Calendar, ArrowLeft } from "lucide-react"
 import type { PartialBlock } from "@blocknote/core"
 
@@ -85,7 +85,7 @@ export default async function LearningEntryPage({
         )}
 
         <div className="prose-dark">
-          <PostRenderer content={entry.content as PartialBlock[]} />
+          <PostRendererWrapper content={entry.content as PartialBlock[]} />
         </div>
 
         <div className="mt-16 border-t border-white/[0.06] pt-8">
