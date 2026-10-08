@@ -31,10 +31,16 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     // Sync Lenis with Framer Motion's update loop
     frame.update(update, true)
+    if (typeof window !== "undefined") {
+      ;(window as any).lenis = lenis
+    }
 
     return () => {
       cancelFrame(update)
       lenis.destroy()
+      if (typeof window !== "undefined") {
+        delete (window as any).lenis
+      }
     }
   }, [])
 

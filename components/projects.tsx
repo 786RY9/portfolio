@@ -65,6 +65,66 @@ function ProjectsError({ message }: { message: string }) {
 }
 
 /* ── Main section ──────────────────────────────────────────── */
+const FALLBACK_PROJECTS: GithubProject[] = [
+  {
+    slug: "innergy-care",
+    num: "01",
+    title: "Innergy Care",
+    description:
+      "A cross-platform wellness application built with Flutter, Riverpod state architecture, and a scalable FastAPI backend, delivering personalized health routines and dynamic UI animations.",
+    role: "Lead Flutter & Full-Stack",
+    year: "2025",
+    languages: ["Dart", "Python", "FastAPI", "PostgreSQL"],
+    stars: 8,
+    forks: 2,
+    pushedAt: "2025-11-12T10:00:00Z",
+    featured: true,
+    order: 1,
+    coverUrl: "/values/01-quality.jpg",
+    demoGifUrl: "/values/01-quality.jpg",
+    githubUrl: "https://github.com/786RY9/innergy-care",
+    isPrivate: false,
+  },
+  {
+    slug: "threatx-malware-detector",
+    num: "02",
+    title: "ThreatX Malware Detector",
+    description:
+      "Static deep learning analysis system that classifies Portable Executable (PE) binaries via convolutional neural networks and automated behavioral heuristics.",
+    role: "ML & Cyber Security",
+    year: "2025",
+    languages: ["Python", "PyTorch", "FastAPI", "Docker"],
+    stars: 14,
+    forks: 4,
+    pushedAt: "2025-10-05T14:30:00Z",
+    featured: true,
+    order: 2,
+    coverUrl: "/values/02-integrity.jpg",
+    demoGifUrl: "/values/02-integrity.jpg",
+    githubUrl: "https://github.com/786RY9/ThreatX_Malware_Detector",
+    isPrivate: false,
+  },
+  {
+    slug: "agentic-rag-assistant",
+    num: "03",
+    title: "Agentic RAG Assistant",
+    description:
+      "Enterprise autonomous retrieval-augmented generation pipeline powered by LangChain, vector databases, and multi-step reasoning tools for zero-hallucination querying.",
+    role: "AI & RAG Engineer",
+    year: "2026",
+    languages: ["Python", "TypeScript", "LangChain", "Next.js"],
+    stars: 19,
+    forks: 5,
+    pushedAt: "2026-02-18T09:15:00Z",
+    featured: true,
+    order: 3,
+    coverUrl: "/values/03-innovation.jpg",
+    demoGifUrl: "/values/03-innovation.jpg",
+    githubUrl: "https://github.com/786RY9",
+    isPrivate: false,
+  },
+]
+
 export function Projects() {
   const [projects, setProjects] = useState<GithubProject[]>([])
   const [loading, setLoading] = useState(true)
@@ -79,11 +139,15 @@ export function Projects() {
         return res.json()
       })
       .then((data: GithubProject[]) => {
-        setProjects(data)
+        if (Array.isArray(data) && data.length > 0) {
+          setProjects(data)
+        } else {
+          setProjects(FALLBACK_PROJECTS)
+        }
         setLoading(false)
       })
-      .catch((err: Error) => {
-        setError(err.message)
+      .catch(() => {
+        setProjects(FALLBACK_PROJECTS)
         setLoading(false)
       })
   }, [])

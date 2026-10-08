@@ -107,7 +107,7 @@ export function Skills() {
   }, [active])
 
   return (
-    <section id="skills" className="relative w-full bg-black py-24 sm:py-32">
+    <section id="skills" className="relative w-full bg-black py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-16 flex flex-col items-center text-center">
           <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.4em] text-white/50">
@@ -290,7 +290,7 @@ function SkillCard({
           ].join(" ")}
         />
       </div>
-      <h3 className="mt-6 font-serif text-3xl italic text-white sm:text-4xl">
+      <h3 className="mt-6 font-serif text-2xl italic text-white sm:text-4xl break-words">
         {skill.title}
       </h3>
       <p className="mt-2 text-sm text-white/50">{skill.subtitle}</p>

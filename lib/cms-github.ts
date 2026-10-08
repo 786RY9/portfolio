@@ -17,7 +17,7 @@ import type { Post, PostMeta, PostType, Service, StoredPost } from "./cms-types"
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN ?? ""
 const GITHUB_USERNAME = process.env.GITHUB_USERNAME ?? "786RY9"
 // CMS content lives inside the portfolio repo itself
-const CMS_REPO = `${GITHUB_USERNAME}/ry_portfolio`
+const CMS_REPO = process.env.CMS_REPO ?? `${GITHUB_USERNAME}/portfolio`
 const CMS_BASE = "cms-content"
 const BRANCHES = ["main", "master"]
 
@@ -25,13 +25,16 @@ const BRANCHES = ["main", "master"]
 // Internal helpers
 // ─────────────────────────────────────────────────────────────────────────────
 
-function ghHeaders() {
-  return {
-    Authorization: `token ${GITHUB_TOKEN}`,
+function ghHeaders(): Record<string, string> {
+  const headers: Record<string, string> = {
     Accept: "application/vnd.github+json",
     "User-Agent": "ry-portfolio-cms",
     "X-GitHub-Api-Version": "2022-11-28",
   }
+  if (GITHUB_TOKEN) {
+    headers.Authorization = `token ${GITHUB_TOKEN}`
+  }
+  return headers
 }
 
 /** Sanitize a slug so it can only be used safely in file paths */
@@ -44,11 +47,15 @@ let _branch: string | null = null
 async function getDefaultBranch(): Promise<string> {
   if (_branch) return _branch
   for (const b of BRANCHES) {
-    const res = await fetch(
-      `https://api.github.com/repos/${CMS_REPO}/branches/${b}`,
-      { headers: ghHeaders(), cache: "no-store" }
-    )
-    if (res.ok) { _branch = b; return b }
+    try {
+      const res = await fetch(
+        `https://api.github.com/repos/${CMS_REPO}/branches/${b}`,
+        { headers: ghHeaders(), cache: "no-store" }
+      )
+      if (res.ok) { _branch = b; return b }
+    } catch {
+      // ignore and try next branch
+    }
   }
   _branch = "main"
   return "main"
@@ -56,15 +63,19 @@ async function getDefaultBranch(): Promise<string> {
 
 /** GET a file from the repo. Returns null if not found. */
 async function getFile(path: string): Promise<{ content: string; sha: string } | null> {
-  const branch = await getDefaultBranch()
-  const res = await fetch(
-    `https://api.github.com/repos/${CMS_REPO}/contents/${path}?ref=${branch}`,
-    { headers: ghHeaders(), cache: "no-store" }
-  )
-  if (res.status === 404) return null
-  if (!res.ok) throw new Error(`GitHub GET ${path} failed: ${res.status}`)
-  const data = await res.json()
-  return { content: Buffer.from(data.content, "base64").toString("utf-8"), sha: data.sha }
+  try {
+    const branch = await getDefaultBranch()
+    const res = await fetch(
+      `https://api.github.com/repos/${CMS_REPO}/contents/${path}?ref=${branch}`,
+      { headers: ghHeaders(), cache: "no-store" }
+    )
+    if (!res.ok) return null
+    const data = await res.json()
+    if (!data?.content) return null
+    return { content: Buffer.from(data.content, "base64").toString("utf-8"), sha: data.sha }
+  } catch {
+    return null
+  }
 }
 
 /** PUT (create or update) a file in the repo via a commit */
@@ -144,15 +155,18 @@ async function deleteFile(path: string, message: string): Promise<void> {
 
 /** List files/dirs at a given path. Returns [] if not found. */
 async function listContents(path: string): Promise<{ name: string; type: "file" | "dir"; sha: string }[]> {
-  const branch = await getDefaultBranch()
-  const res = await fetch(
-    `https://api.github.com/repos/${CMS_REPO}/contents/${path}?ref=${branch}`,
-    { headers: ghHeaders(), cache: "no-store" }
-  )
-  if (res.status === 404) return []
-  if (!res.ok) throw new Error(`GitHub LIST ${path} failed: ${res.status}`)
-  const data = await res.json()
-  return Array.isArray(data) ? data : []
+  try {
+    const branch = await getDefaultBranch()
+    const res = await fetch(
+      `https://api.github.com/repos/${CMS_REPO}/contents/${path}?ref=${branch}`,
+      { headers: ghHeaders(), cache: "no-store" }
+    )
+    if (!res.ok) return []
+    const data = await res.json()
+    return Array.isArray(data) ? data : []
+  } catch {
+    return []
+  }
 }
 
 /** Build a proxied URL for a CMS media file */
@@ -187,9 +201,9 @@ export async function listPosts(
           const coverPath = `${dir}/${slug}/cover.jpg`
           const coverExists = await getFile(coverPath)
           posts.push({
+            ...stored.meta,
             slug,
             type,
-            ...stored.meta,
             coverUrl: coverExists ? cmsAssetUrl(coverPath) : null,
           })
         } catch {
@@ -216,9 +230,9 @@ export async function fetchPost(type: PostType, slug: string): Promise<Post | nu
     const coverPath = `${dir}/cover.jpg`
     const coverExists = await getFile(coverPath)
     return {
+      ...stored.meta,
       slug: safe,
       type,
-      ...stored.meta,
       coverUrl: coverExists ? cmsAssetUrl(coverPath) : null,
       content: stored.content,
     }
