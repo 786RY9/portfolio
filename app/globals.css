@@ -82,6 +82,7 @@
   html, body {
     @apply bg-background text-foreground;
     background-color: #000;
+    overflow-x: clip;
   }
   @media (hover: hover) and (pointer: fine) {
     html.has-custom-cursor,
@@ -124,3 +125,50 @@ html.lenis, html.lenis body { height: auto; }
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ─── Custom Themed Vertical Scrollbar ─── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff0030 0%, oklch(0.55 0.22 25) 50%, #99001a 100%);
+  border-radius: 9999px;
+  border: 1.5px solid #000000;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff2a55 0%, oklch(0.68 0.22 25) 100%);
+  box-shadow: 0 0 12px rgba(255, 0, 48, 0.6);
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: linear-gradient(180deg, #ff4d6d 0%, #ff0030 100%);
+  box-shadow: 0 0 16px rgba(255, 0, 48, 0.85);
+}
+
+::-webkit-scrollbar-corner {
+  background: #000000;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Fallback for browsers without webkit scrollbar support (e.g. Firefox) */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.55 0.22 25) #000000;
+  }
+}
+

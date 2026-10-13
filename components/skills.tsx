@@ -107,7 +107,7 @@ export function Skills() {
   }, [active])
 
   return (
-    <section id="skills" className="relative w-full bg-black py-24 sm:py-32">
+    <section id="skills" className="relative w-full bg-black py-24 sm:py-32 overflow-hidden">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mb-16 flex flex-col items-center text-center">
           <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.4em] text-white/50">

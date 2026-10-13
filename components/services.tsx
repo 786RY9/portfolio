@@ -74,7 +74,7 @@ export function Services() {
   const display = loading ? FALLBACK_SERVICES : services
 
   return (
-    <section id="services" className="relative w-full bg-black py-24 sm:py-32">
+    <section id="services" className="relative w-full bg-black py-24 sm:py-32 overflow-hidden">
       {/* Ambient glow */}
       <div
         aria-hidden
