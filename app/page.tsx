@@ -18,7 +18,7 @@ export default function Page() {
   const [loading, setLoading] = useState(true)
 
   return (
-    <main className="bg-black text-white w-full max-w-full overflow-x-hidden">
+    <main className="bg-black text-white">
       {loading && <Loader onFinish={() => setLoading(false)} />}
       <SmoothScroll />
       <Cursor />

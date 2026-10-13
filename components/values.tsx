@@ -144,7 +144,7 @@ export function Values() {
     <section
       ref={sectionRef}
       id="values"
-      className="relative bg-black overflow-x-clip"
+      className="relative bg-black"
       style={{ height: `${VALUES.length * 110}vh` }}
       aria-label="What I stand for"
     >
@@ -189,7 +189,7 @@ export function Values() {
                 <div
                   className="relative"
                   style={{
-                    width: "min(440px, 66vw)",
+                    width: "min(440px, 70vw)",
                     aspectRatio: "1 / 1",
                     transform: `rotate(${v.tilt}deg)`,
                     transition: "transform 600ms cubic-bezier(0.22, 1, 0.36, 1)",

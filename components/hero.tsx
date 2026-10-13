@@ -219,7 +219,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
         initial={{ opacity: 0, x: -10 }}
         animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
         transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
-        className="absolute left-3 sm:left-7 top-1/2 z-30 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180"
+        className="absolute left-7 top-1/2 z-30 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180"
       >
         <p className="font-sans text-xs font-bold uppercase tracking-[0.42em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           Available for hire —{" "}
@@ -260,7 +260,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
       </motion.div>
 
       {/* Scroll indicator — mobile fallback (hidden on lg+) */}
-      <div className="absolute right-3 sm:right-8 top-1/2 z-30 -translate-y-1/2 flex flex-col items-center gap-3 lg:hidden">
+      <div className="absolute right-8 top-1/2 z-30 -translate-y-1/2 flex flex-col items-center gap-3 lg:hidden">
         <span className="font-sans text-[10px] font-bold uppercase tracking-[0.4em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [writing-mode:vertical-rl]">
           Scroll
         </span>
@@ -272,7 +272,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
       {/* Center stage */}
       <div
         ref={stageRef}
-        className="relative z-10 flex w-full items-center justify-center px-4 sm:px-6 hero-stage"
+        className="relative z-10 flex w-full items-center justify-center px-6 hero-stage"
         style={{ perspective: "1400px", minHeight: "100vh" }}
       >
         <div
@@ -287,7 +287,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             <h1
               className="hero-tilt-strong whitespace-nowrap font-serif font-black italic drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               style={{
-                fontSize: "clamp(2.75rem, 13vw, 11rem)",
+                fontSize: "clamp(3.5rem, 13vw, 11rem)",
                 lineHeight: 0.9,
                 letterSpacing: "0.02em",
                 color: "rgba(255, 255, 255, 0.06)",
@@ -299,13 +299,13 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             </h1>
           </div>
 
-          {/* Circle wrapper — full viewport height, constrained by viewport width on mobile */}
+          {/* Circle wrapper — full viewport height */}
           <div
             ref={circleRef}
             className="relative flex items-end justify-center"
             style={{
-              height: "min(92vh, 860px, 92vw)",
-              width: "min(92vh, 860px, 92vw)",
+              height: "min(92vh, 860px)",
+              width: "min(92vh, 860px)",
             }}
           >
             <div
@@ -314,18 +314,18 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             />
 
             <p
-              className="hero-tilt-mid absolute left-1/2 top-[10%] z-[12] -translate-x-1/2 whitespace-nowrap font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.5em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate-[fadeIn_1400ms_900ms_ease-out_both]"
+              className="hero-tilt-mid absolute left-1/2 top-[10%] z-[12] -translate-x-1/2 whitespace-nowrap font-mono text-[10px] font-bold uppercase tracking-[0.5em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate-[fadeIn_1400ms_900ms_ease-out_both]"
             >
               Sahiwal, Pakistan · Est. 2026
             </p>
 
-            {/* Portrait image — taller to fill viewport, scaled on mobile */}
+            {/* Portrait image — taller to fill viewport */}
             <motion.div
               initial={{ opacity: 0, y: 50, scale: 0.95, filter: "blur(12px)" }}
               animate={ready ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, y: 50, scale: 0.95, filter: "blur(12px)" }}
               transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-              className="hero-tilt-portrait relative z-[15] w-auto max-w-full"
-              style={{ height: "min(88vh, 820px, 125vw)" }}
+              className="hero-tilt-portrait relative z-[15] w-auto"
+              style={{ height: "min(88vh, 820px)" }}
             >
               <Image
                 src="/portrait.png"
@@ -337,12 +337,12 @@ export function Hero({ ready = false }: { ready?: boolean }) {
               />
             </motion.div>
 
-            {/* ─── EMAIL COPY BUTTON — right side of image on tablet/desktop ─── */}
+            {/* ─── EMAIL COPY BUTTON — right side of image ─── */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
-              className="hidden md:block absolute md:right-[-9rem] top-[45%] z-[20] -translate-y-1/2"
+              className="absolute right-[-1rem] md:right-[-9rem] top-[45%] z-[20] -translate-y-1/2"
             >
               <button
                 type="button"
@@ -404,7 +404,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             <h2
               className="hero-tilt-strong whitespace-nowrap font-serif font-black italic drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               style={{
-                fontSize: "clamp(2.75rem, 13vw, 11rem)",
+                fontSize: "clamp(3.5rem, 13vw, 11rem)",
                 lineHeight: 0.9,
                 letterSpacing: "0.02em",
                 color: "rgba(255, 255, 255, 0.06)",

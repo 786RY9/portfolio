@@ -125,15 +125,15 @@ export function Footer() {
             />
             <h2 className="relative">
               <span
-                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em] break-words"
-                style={{ fontSize: "clamp(2rem, 7vw, 7.5rem)" }}
+                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em]"
+                style={{ fontSize: "clamp(3rem, 7vw, 7.5rem)" }}
               >
                 What is sleep, and
               </span>
               <span
-                className="block font-sans font-black leading-[0.88] tracking-[-0.045em] mt-1 break-words"
+                className="block font-sans font-black leading-[0.88] tracking-[-0.045em] mt-1"
                 style={{
-                  fontSize: "clamp(2rem, 7vw, 7.5rem)",
+                  fontSize: "clamp(3rem, 7vw, 7.5rem)",
                   color: "transparent",
                   WebkitTextStroke: "1.5px rgba(255,255,255,0.5)",
                 }}
@@ -141,8 +141,8 @@ export function Footer() {
                 why is it important,
               </span>
               <span
-                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em] mt-1 break-words"
-                style={{ fontSize: "clamp(2rem, 7vw, 7.5rem)" }}
+                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em] mt-1"
+                style={{ fontSize: "clamp(3rem, 7vw, 7.5rem)" }}
               >
                 and what is{" "}
                 <span className="text-[oklch(0.62_0.24_25)]">it?</span>
@@ -211,14 +211,14 @@ export function Footer() {
       {/* MASSIVE EDGE-TO-EDGE WORDMARK with cursor spotlight */}
       <div
         ref={nameRef}
-        className="footer-name relative w-full select-none whitespace-nowrap leading-none overflow-hidden"
+        className="footer-name relative w-full select-none whitespace-nowrap leading-none"
         aria-label="Rashid Yaseen"
         style={
           {
             fontFamily: "var(--font-sans, system-ui), sans-serif",
             fontWeight: 900,
             letterSpacing: "-0.055em",
-            fontSize: "clamp(1.75rem, 11.5vw, 16rem)",
+            fontSize: "clamp(2.5rem, 11.5vw, 16rem)",
             paddingLeft: "1vw",
             paddingRight: "1vw",
             paddingBottom: "0.4vw",
