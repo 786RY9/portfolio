@@ -9,17 +9,14 @@ const GITHUB_TOKEN = process.env.GITHUB_TOKEN ?? ""
 const PORTFOLIO_TOPIC = "portfolio"
 
 /** Shared fetch headers using the PAT — token never leaves the server */
-function ghHeaders(): Record<string, string> {
-  const headers: Record<string, string> = {
+function ghHeaders() {
+  return {
+    Authorization: `token ${GITHUB_TOKEN}`,
     // Include mercy-preview so GitHub returns the `topics` array on repos
     Accept: "application/vnd.github.mercy-preview+json",
     "User-Agent": "portfolio-app",
     "X-GitHub-Api-Version": "2022-11-28",
   }
-  if (GITHUB_TOKEN) {
-    headers.Authorization = `token ${GITHUB_TOKEN}`
-  }
-  return headers
 }
 
 /** Fetch all repos (public + private) for the authenticated user */
@@ -123,74 +120,12 @@ function fallbackDescription(repoDesc: string | null, languages: string[], repoN
   return `${title} — a development project by Rashid Yaseen.`
 }
 
-const FALLBACK_PROJECTS: GithubProject[] = [
-  {
-    slug: "innergy-care",
-    num: "01",
-    title: "Innergy Care",
-    description:
-      "A cross-platform wellness application built with Flutter, Riverpod state architecture, and a scalable FastAPI backend, delivering personalized health routines and dynamic UI animations.",
-    role: "Lead Flutter & Full-Stack",
-    year: "2025",
-    languages: ["Dart", "Python", "FastAPI", "PostgreSQL"],
-    stars: 8,
-    forks: 2,
-    pushedAt: "2025-11-12T10:00:00Z",
-    featured: true,
-    order: 1,
-    coverUrl: "/values/01-quality.jpg",
-    demoGifUrl: "/values/01-quality.jpg",
-    githubUrl: "https://github.com/786RY9/innergy-care",
-    isPrivate: false,
-  },
-  {
-    slug: "threatx-malware-detector",
-    num: "02",
-    title: "ThreatX Malware Detector",
-    description:
-      "Static deep learning analysis system that classifies Portable Executable (PE) binaries via convolutional neural networks and automated behavioral heuristics.",
-    role: "ML & Cyber Security",
-    year: "2025",
-    languages: ["Python", "PyTorch", "FastAPI", "Docker"],
-    stars: 14,
-    forks: 4,
-    pushedAt: "2025-10-05T14:30:00Z",
-    featured: true,
-    order: 2,
-    coverUrl: "/values/02-integrity.jpg",
-    demoGifUrl: "/values/02-integrity.jpg",
-    githubUrl: "https://github.com/786RY9/ThreatX_Malware_Detector",
-    isPrivate: false,
-  },
-  {
-    slug: "agentic-rag-assistant",
-    num: "03",
-    title: "Agentic RAG Assistant",
-    description:
-      "Enterprise autonomous retrieval-augmented generation pipeline powered by LangChain, vector databases, and multi-step reasoning tools for zero-hallucination querying.",
-    role: "AI & RAG Engineer",
-    year: "2026",
-    languages: ["Python", "TypeScript", "LangChain", "Next.js"],
-    stars: 19,
-    forks: 5,
-    pushedAt: "2026-02-18T09:15:00Z",
-    featured: true,
-    order: 3,
-    coverUrl: "/values/03-innovation.jpg",
-    demoGifUrl: "/values/03-innovation.jpg",
-    githubUrl: "https://github.com/786RY9",
-    isPrivate: false,
-  },
-]
-
 export async function GET() {
   if (!GITHUB_TOKEN) {
-    return NextResponse.json(FALLBACK_PROJECTS, {
-      headers: {
-        "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
-        "X-Fallback-Data": "true",
-      },
-    })
+    return NextResponse.json(
+      { error: "GITHUB_TOKEN not configured" },
+      { status: 500 }
+    )
   }
 
   // 1. Fetch all repos

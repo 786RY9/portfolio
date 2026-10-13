@@ -228,7 +228,7 @@ function TestimonialCard({
         }}
       />
       <span className="absolute -top-4 left-8 font-serif italic text-7xl text-[oklch(0.55_0.22_25)]/40 leading-none select-none">
-        “
+        \u201C
       </span>
       <p className="font-serif italic text-xl sm:text-2xl text-white/90 leading-snug text-balance">
         {quote}
@@ -240,7 +240,7 @@ function TestimonialCard({
         <div>
           <p className="font-sans text-sm font-semibold text-white">{name}</p>
           <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-white/45">
-            {role} · {company}
+            {role} \u00B7 {company}
           </p>
         </div>
       </div>

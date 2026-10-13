@@ -25,16 +25,11 @@ export function IntroOverlay() {
     setShow(true)
     document.body.style.overflow = "hidden"
     
-    const finish = () => {
+    const t = setTimeout(() => {
       setShow(false)
       document.body.style.overflow = ""
       sessionStorage.setItem("ry_intro_seen", "1")
-      if (typeof window !== "undefined") {
-        window.dispatchEvent(new Event("ry_intro_finish"))
-      }
-    }
-
-    const t = setTimeout(finish, 3800)
+    }, 3800)
     
     return () => {
       clearTimeout(t)
@@ -46,9 +41,6 @@ export function IntroOverlay() {
     setShow(false)
     document.body.style.overflow = ""
     sessionStorage.setItem("ry_intro_seen", "1")
-    if (typeof window !== "undefined") {
-      window.dispatchEvent(new Event("ry_intro_finish"))
-    }
   }
 
   if (!mounted) return null

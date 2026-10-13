@@ -50,6 +50,8 @@ export function GithubCalendarWidget() {
                     blockRadius={2}
                     blockSize={11}
                     fontSize={12}
+                    hideTotalCount
+                    hideColorLegend
                   />
                 )}
               </motion.div>

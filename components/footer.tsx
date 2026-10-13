@@ -171,7 +171,7 @@ export function Footer() {
               <InfoCell
                 label="Resume"
                 value="Download (PDF)"
-                href="mailto:rashidyaseen5484@gmail.com?subject=Resume%20Request"
+                href="#"
               />
             </div>
           </div>

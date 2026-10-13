@@ -6,7 +6,7 @@ import { Navbar } from "@/components/navbar"
 import "./globals.css"
 
 import { SmoothScrollProvider } from "@/components/providers/smooth-scroll-provider"
-import { Cursor } from "@/components/cursor"
+import { CustomCursor } from "@/components/ui/custom-cursor"
 import { ScrollProgress } from "@/components/ui/scroll-progress"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-black text-white md:cursor-none">
         <SmoothScrollProvider>
           <IntroOverlay />
-          <Cursor />
+          <CustomCursor />
           <ScrollProgress />
           <Navbar />
           {children}
