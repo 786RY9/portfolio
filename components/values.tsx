@@ -148,6 +148,7 @@ export function Values() {
       style={{ height: `${VALUES.length * 110}vh` }}
       aria-label="What I stand for"
     >
+
       <div className="sticky top-0 h-screen w-full overflow-hidden">
         {/* Big bold heading */}
         <div className="pointer-events-none absolute left-1/2 top-3 z-30 -translate-x-1/2 whitespace-nowrap text-center font-black uppercase leading-none tracking-tight md:top-5">
@@ -164,7 +165,7 @@ export function Values() {
         </div>
 
         {/* Stacked slides */}
-        <div className="absolute inset-0 z-10 grid grid-cols-12 items-center gap-6 px-6 md:px-12">
+        <div className="absolute inset-0 z-10 grid grid-cols-12 items-center gap-6 px-6 md:px-12 translate-y-[4vh]">
           {VALUES.map((v, i) => (
             <div
               key={v.num}
@@ -189,7 +190,7 @@ export function Values() {
                 <div
                   className="relative"
                   style={{
-                    width: "min(440px, 70vw)",
+                    width: "min(420px,66vw, 42vh)",
                     aspectRatio: "1 / 1",
                     transform: `rotate(${v.tilt}deg)`,
                     transition: "transform 600ms cubic-bezier(0.22, 1, 0.36, 1)",
@@ -258,7 +259,7 @@ export function Values() {
           aria-hidden
           className="pointer-events-none absolute left-1/2 z-20 select-none font-black uppercase tracking-tighter will-change-transform"
           style={{
-            top: "calc(50% - min(440px, 70vw) / 2 - 1rem)",
+            top: "calc(50% + 4vh - min(420px, 66vw, 42vh) / 2 - 1.25rem)",
             transform: "translate(-50%, -100%)",
             fontSize: "clamp(3rem, 6.5vw, 6rem)",
             color: "rgba(255,255,255,0.13)",
@@ -273,7 +274,7 @@ export function Values() {
           aria-hidden
           className="pointer-events-none absolute left-1/2 z-20 -translate-x-1/2 select-none font-black uppercase tracking-tighter will-change-transform"
           style={{
-            top: "calc(50% + min(440px, 70vw) / 2 + 1rem)",
+            top: "calc(50% + 4vh + min(420px, 66vw, 42vh) / 2 + 1.25rem)",
             fontSize: "clamp(3rem, 6.5vw, 6rem)",
             color: "rgba(255,255,255,0.13)",
             lineHeight: 0.9,

@@ -7,7 +7,7 @@ import { Values } from "@/components/values"
 import { Skills } from "@/components/skills"
 import { Projects } from "@/components/projects"
 import { Services } from "@/components/services"
-import { GithubSection } from "@/components/github-section"
+// import { GithubSection } from "@/components/github-section"
 import { Feedback } from "@/components/feedback"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
@@ -25,10 +25,10 @@ export default function Page() {
       <Hero ready={!loading} />
       <Values />
       <Skills />
-      <Projects />
+      {/* <Projects /> */}
       <Services />
-      <GithubSection />
-      <Feedback />
+      {/* <GithubSection /> */}
+      {/* <Feedback /> */}
       <Contact />
       <Footer />
     </main>
