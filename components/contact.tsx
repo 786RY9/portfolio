@@ -20,20 +20,24 @@ export function Contact() {
 
       <div className="relative mx-auto max-w-[1500px] px-6">
         {/* Top eyebrow */}
-        <div className="flex items-center justify-between mb-16">
+        <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-5 mb-16">
           <div className="flex items-center gap-3 font-mono text-[10px] uppercase tracking-[0.4em] text-white/50">
             <span className="h-px w-10 bg-[oklch(0.55_0.22_25)]" />
             <span>Contact</span>
           </div>
-          <div className="hidden md:flex items-center gap-3 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-md">
-            <span className="relative flex h-2 w-2">
+          <p className="flex items-center gap-3 rounded-2xl sm:rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 backdrop-blur-md">
+            <span aria-hidden className="relative flex h-2 w-2 shrink-0">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
             </span>
-            <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/80">
-              Available · Q2 2026
+            <span className="flex flex-wrap items-center gap-x-3 gap-y-0.5">
+              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/80">
+                Available now
+              </span>
+              <span aria-hidden className="hidden sm:inline text-white/30">·</span>
+              <span className="text-xs text-white/70">Open to ML and full-stack roles</span>
             </span>
-          </div>
+          </p>
         </div>
 
         {/* Massive headline — magic5 style stacked */}

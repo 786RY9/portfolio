@@ -1,12 +1,10 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
 import { motion } from "framer-motion"
 import {
   Globe, Smartphone, Brain, Bot, Server, Shield,
   Terminal, Code2, Layers, Cpu, Wrench, Rocket,
-  ArrowUpRight
 } from "lucide-react"
 import type { Service } from "@/lib/cms-types"
 
@@ -15,35 +13,36 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Terminal, Code2, Layers, Cpu, Wrench, Rocket,
 }
 
-// Fallback defaults shown before data loads or if GitHub is unreachable
+// Fallback defaults shown before data loads or if GitHub is unreachable.
+// Mirrors the featured entries in public/services-default.json (the CMS seed).
 const FALLBACK_SERVICES: Service[] = [
   {
-    id: "web",
-    title: "Web App Development",
-    tagline: "Next.js · FastAPI · Full-Stack",
-    description: "Performant, scalable web applications built with modern stacks.",
-    icon: "Globe",
-    features: ["Next.js / React", "FastAPI / Django", "PostgreSQL / Redis"],
+    id: "ai-ml",
+    title: "AI & Machine Learning Systems",
+    tagline: "Models · RAG · Agents",
+    description: "Machine learning models and LLM systems, taken from data preparation to a working deployment.",
+    icon: "Brain",
+    features: ["Image classification with TensorFlow", "RAG on Amazon Bedrock", "Multi-agent LLM prototypes"],
     featured: true,
     order: 0,
   },
   {
-    id: "flutter",
-    title: "Flutter Apps",
-    tagline: "iOS · Android · Desktop",
-    description: "Native-quality cross-platform mobile apps from a single codebase.",
-    icon: "Smartphone",
-    features: ["iOS & Android", "macOS & Windows", "Riverpod / Bloc"],
+    id: "full-stack",
+    title: "Full-Stack Web Apps",
+    tagline: "Next.js · Fastify · FastAPI",
+    description: "Typed web applications, APIs and operations tools backed by PostgreSQL.",
+    icon: "Globe",
+    features: ["Next.js / React", "Fastify / FastAPI / Express", "PostgreSQL + Prisma"],
     featured: true,
     order: 1,
   },
   {
-    id: "ai",
-    title: "RAG & Agentic AI",
-    tagline: "LLMs · Agents · Automation",
-    description: "Production-ready AI pipelines, RAG systems, and autonomous agents.",
-    icon: "Bot",
-    features: ["LangChain / LlamaIndex", "Vector databases", "n8n / Make automation"],
+    id: "devops",
+    title: "Cloud & DevOps",
+    tagline: "Docker · Kubernetes · CI/CD",
+    description: "Containerized deployments with automated builds, monitoring and cloud hosting.",
+    icon: "Server",
+    features: ["Docker / Kubernetes / Argo CD", "GitHub Actions / Jenkins", "AWS / Oracle Cloud"],
     featured: true,
     order: 2,
   },
@@ -99,7 +98,7 @@ export function Services() {
             What I Build
           </h2>
           <p className="mt-4 max-w-xl text-balance text-sm leading-relaxed text-white/50">
-            From AI systems to mobile apps — I design and ship production-ready solutions across the full technology stack.
+            From machine learning models to the full-stack systems and infrastructure around them.
           </p>
         </motion.div>
 
@@ -151,23 +150,6 @@ export function Services() {
             )
           })}
         </div>
-
-        {/* CTA */}
-        <motion.div
-          className="mt-12 text-center"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <Link
-            href="/services"
-            className="group inline-flex items-center gap-2 font-sans text-sm font-semibold text-white/60 transition-colors hover:text-white"
-          >
-            View all services
-            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45 group-hover:text-[oklch(0.7_0.18_25)]" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   )

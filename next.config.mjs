@@ -20,6 +20,10 @@ const nextConfig = {
       },
     ],
   },
+  // The standalone /services page was removed; the summary lives on the homepage.
+  async redirects() {
+    return [{ source: "/services", destination: "/#services", permanent: true }]
+  },
   // Security headers applied to all routes
   async headers() {
     return [

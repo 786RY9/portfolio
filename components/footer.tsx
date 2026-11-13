@@ -16,7 +16,7 @@ const SOCIALS = [
 const NAV_LINKS = [
   { label: "Blog", href: "/blog" },
   { label: "Learning Log", href: "/learnings" },
-  { label: "Services", href: "/services" },
+  { label: "Services", href: "/#services" },
 ]
 
 export function Footer() {
@@ -112,43 +112,8 @@ export function Footer() {
   return (
     <footer ref={ref} className="relative bg-black overflow-hidden">
 
-      {/* ── Editorial Masthead Section ── */}
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-[1500px] px-6 pt-28 md:pt-36">
-
-          {/* Full-width headline with mixed typography */}
-          <div className="relative mb-20 md:mb-28">
-            {/* Ambient glow */}
-            <div
-              aria-hidden
-              className="pointer-events-none absolute left-1/4 -top-24 h-[400px] w-[600px] rounded-full bg-[oklch(0.50_0.20_25)]/[0.06] blur-[150px]"
-            />
-            <h2 className="relative">
-              <span
-                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em] break-words"
-                style={{ fontSize: "clamp(2rem, 7vw, 7.5rem)" }}
-              >
-                What is sleep, and
-              </span>
-              <span
-                className="block font-sans font-black leading-[0.88] tracking-[-0.045em] mt-1 break-words"
-                style={{
-                  fontSize: "clamp(2rem, 7vw, 7.5rem)",
-                  color: "transparent",
-                  WebkitTextStroke: "1.5px rgba(255,255,255,0.5)",
-                }}
-              >
-                why is it important,
-              </span>
-              <span
-                className="block font-sans font-black text-white leading-[0.88] tracking-[-0.045em] mt-1 break-words"
-                style={{ fontSize: "clamp(2rem, 7vw, 7.5rem)" }}
-              >
-                and what is{" "}
-                <span className="text-[oklch(0.62_0.24_25)]">it?</span>
-              </span>
-            </h2>
-          </div>
+      <div>
+        <div className="mx-auto max-w-[1500px] px-6">
 
           {/* ── Horizontal dateline strip ── */}
           <div className="border-t border-white/10">
@@ -171,7 +136,8 @@ export function Footer() {
               <InfoCell
                 label="Resume"
                 value="Download (PDF)"
-                href="#"
+                href="/Rashid_Yaseen_Resume_ML_Engineer.pdf"
+                newTab
               />
             </div>
           </div>
@@ -286,14 +252,22 @@ function InfoCell({
   href,
   mono,
   live,
+  newTab,
 }: {
   label: string
   value: string
   href?: string
   mono?: boolean
   live?: boolean
+  /** Open in a new tab (target="_blank" rel="noopener"). External http links always do. */
+  newTab?: boolean
 }) {
   const Tag: "a" | "div" = href ? "a" : "div"
+  const linkProps = !href
+    ? {}
+    : newTab
+      ? { href, target: "_blank", rel: "noopener" }
+      : { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noreferrer" }
   return (
     <div className="group relative py-7 px-5 lg:px-8 transition-colors duration-500 hover:bg-white/[0.02]">
       <div className="flex items-center gap-2 mb-3">
@@ -308,7 +282,7 @@ function InfoCell({
         </p>
       </div>
       <Tag
-        {...(href ? { href, target: href.startsWith("http") ? "_blank" : undefined, rel: "noreferrer" } : {})}
+        {...linkProps}
         className={`block text-white font-sans font-bold text-base sm:text-lg tracking-[-0.01em] transition-colors duration-300 ${
           mono ? "font-mono tabular-nums !font-medium tracking-normal" : ""
         } ${href ? "hover:text-[oklch(0.7_0.18_25)]" : ""}`}

@@ -126,6 +126,50 @@ html.lenis, html.lenis body { height: auto; }
   }
 }
 
+/* ─── Intro loader (components/loader.tsx) ───
+   Hidden unless the inline head script set html[data-intro="play"].
+   Timeline: ring fills 0–700ms, wipe-up 750–1150ms. */
+.intro-loader { display: none; }
+html[data-intro="play"] .intro-loader {
+  display: flex;
+  animation: introWipe 400ms cubic-bezier(0.86, 0, 0.07, 1) 750ms forwards;
+}
+.intro-loader-ring {
+  stroke-dashoffset: var(--ring);
+  animation: introRing 700ms cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+@keyframes introWipe {
+  from { clip-path: inset(0 0 0% 0); }
+  to { clip-path: inset(0 0 100% 0); visibility: hidden; }
+}
+@keyframes introRing {
+  to { stroke-dashoffset: 0; }
+}
+
+/* ─── Entrance motion (hero + page fade) ───
+   Pure CSS so content is visible in the server-rendered HTML and without JS.
+   Per-element knobs: --d (delay), --dur, --hx/--hy (offset), --hs (scale),
+   --hr (rotate), --hb (blur). When the intro loader plays, entrances wait for it. */
+html[data-intro] { --intro-offset: 800ms; }
+.hero-in {
+  animation: heroIn var(--dur, 1s) cubic-bezier(0.16, 1, 0.3, 1) backwards;
+  animation-delay: calc(var(--d, 0s) + var(--intro-offset, 0s));
+}
+@keyframes heroIn {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--hx, 0), var(--hy, 0), 0) scale(var(--hs, 1)) rotate(var(--hr, 0deg));
+    filter: blur(var(--hb, 0px));
+  }
+}
+.page-fade { animation: pageFade 600ms cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+@keyframes pageFade { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-in, .page-fade { animation: none !important; }
+  .intro-loader { display: none !important; }
+}
+
 /* ─── Custom Themed Vertical Scrollbar ─── */
 ::-webkit-scrollbar {
   width: 8px;

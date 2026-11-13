@@ -6,12 +6,13 @@ import { Github, Linkedin, Twitter, Mail, Copy, Check, X, ArrowUpRight } from "l
 import { useEffect, useRef, useState, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
+// Aligned with the resume headline: "Machine Learning Engineer | Full-Stack AI Systems".
 const ROLES = [
-  "Web App Developer",
-  "Flutter Specialist",
-  "ML & DL Engineer",
-  "DevOps Engineer",
-  "RAG / Agentic AI",
+  "ML Engineer",
+  "Full-Stack AI Systems",
+  "Computer Vision",
+  "RAG & Agents",
+  "MLOps & DevOps",
 ]
 
 const EMAIL = "rashidyaseen5484@gmail.com"
@@ -20,13 +21,29 @@ const NAV_LINKS = [
   { label: "About", href: "/#values" },
   { label: "Skills", href: "/#skills" },
   { label: "Projects", href: "/#projects" },
-  { label: "Services", href: "/services" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Services", href: "/#services" },
   { label: "Blog", href: "/blog" },
   { label: "Learning Log", href: "/learnings" },
   { label: "Contact", href: "/#contact" },
 ]
 
-export function Hero({ ready = false }: { ready?: boolean }) {
+/**
+ * Inline vars for the CSS entrance (.hero-in in globals.css). Content is
+ * server-rendered visible; the animation only plays on top of it, and waits
+ * for the intro loader when that is showing.
+ */
+function enter(o: { d?: number; dur?: number; x?: string; y?: string; s?: number; r?: string; b?: string }) {
+  const v: Record<string, string> = { "--d": `${o.d ?? 0}s`, "--dur": `${o.dur ?? 1}s` }
+  if (o.x) v["--hx"] = o.x
+  if (o.y) v["--hy"] = o.y
+  if (o.s !== undefined) v["--hs"] = String(o.s)
+  if (o.r) v["--hr"] = o.r
+  if (o.b) v["--hb"] = o.b
+  return v as React.CSSProperties
+}
+
+export function Hero() {
   const stageRef = useRef<HTMLDivElement>(null)
   const circleRef = useRef<HTMLDivElement>(null)
   const [roleIndex, setRoleIndex] = useState(0)
@@ -134,6 +151,9 @@ export function Hero({ ready = false }: { ready?: boolean }) {
       className="relative w-full overflow-hidden bg-black text-white"
       style={{ minHeight: "100vh" }}
     >
+      {/* The visible name below is decorative (aria-hidden); this is the real page heading. */}
+      <h1 className="sr-only">Rashid Yaseen, Machine Learning &amp; Full-Stack AI Engineer</h1>
+
       {/* Interactive 3D Starfield & Nebula Glow */}
       <InteractiveStarfield />
 
@@ -169,70 +189,53 @@ export function Hero({ ready = false }: { ready?: boolean }) {
       <NavDrawer open={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* Logo mark RY */}
-      <motion.div 
-        initial={{ opacity: 0, y: -20 }}
-        animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: -20 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-        className="absolute left-1/2 top-6 z-30 -translate-x-1/2"
+      <div
+        className="hero-in absolute left-1/2 top-6 z-30 -translate-x-1/2"
+        style={enter({ d: 0.1, dur: 0.8, y: "-20px" })}
       >
         <span className="font-serif italic text-3xl tracking-wide text-white">
           RY<span className="text-[oklch(0.65_0.22_25)]">.</span>
         </span>
-      </motion.div>
+      </div>
 
       {/* Top right socials */}
-      <motion.div 
-        initial="hidden"
-        animate={ready ? "visible" : "hidden"}
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.1 } }
-        }}
-        className="absolute right-6 top-6 z-30 flex items-center gap-5"
-      >
+      <div className="absolute right-6 top-6 z-30 flex items-center gap-5">
         {[
           { Icon: Github, label: "GitHub", href: "https://github.com/786RY9" },
           { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/rashid-yaseen-7bb729294/" },
           { Icon: Twitter, label: "X", href: "https://x.com/ras_yaseen5484" },
           { Icon: Mail, label: "Email", href: "mailto:rashidyaseen5484@gmail.com" },
-        ].map(({ Icon, label, href }) => (
-          <motion.a
+        ].map(({ Icon, label, href }, i) => (
+          <a
             key={label}
             href={href}
             target="_blank"
             rel="noreferrer noopener"
             aria-label={label}
             data-cursor={label}
-            variants={{
-              hidden: { opacity: 0, y: -10 },
-              visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-            }}
-            className="text-white/85 transition-all duration-300 hover:text-white hover:-translate-y-0.5"
+            style={enter({ d: 0.1 + i * 0.1, dur: 0.6, y: "-10px" })}
+            className="hero-in text-white/85 transition-all duration-300 hover:text-white hover:-translate-y-0.5"
           >
             <Icon className="h-4 w-4" />
-          </motion.a>
+          </a>
         ))}
-      </motion.div>
+      </div>
 
       {/* Left vertical badge */}
-      <motion.div
-        initial={{ opacity: 0, x: -10 }}
-        animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: -10 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 0.8 }}
-        className="absolute left-3 sm:left-7 top-1/2 z-30 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180"
+      <div
+        className="hero-in absolute left-3 sm:left-7 top-1/2 z-30 -translate-y-1/2 [writing-mode:vertical-rl] rotate-180"
+        style={enter({ d: 0.8, x: "10px" })}
       >
         <p className="font-sans text-xs font-bold uppercase tracking-[0.42em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
           Available for hire —{" "}
           <span className="text-[oklch(0.7_0.18_25)] animate-pulse">Open to work!</span>
         </p>
-      </motion.div>
+      </div>
 
       {/* ─── AI ENGINEER vertical text — RIGHT SIDE ─── */}
-      <motion.div
-        initial={{ opacity: 0, x: 10 }}
-        animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: 10 }}
-        transition={{ duration: 1, ease: "easeOut", delay: 1.0 }}
-        className="absolute right-6 top-1/2 z-20 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6"
+      <div
+        className="hero-in absolute right-6 top-1/2 z-20 -translate-y-1/2 hidden lg:flex flex-col items-center gap-6"
+        style={enter({ d: 1.0, x: "10px" })}
       >
         <div className="[writing-mode:vertical-rl]">
           <p
@@ -257,7 +260,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             <span className="absolute left-0 top-0 block h-1/3 w-px bg-white animate-[scrollLine_2s_ease-in-out_infinite]" />
           </span>
         </div>
-      </motion.div>
+      </div>
 
       {/* Scroll indicator — mobile fallback (hidden on lg+) */}
       <div className="absolute right-3 sm:right-8 top-1/2 z-30 -translate-y-1/2 flex flex-col items-center gap-3 lg:hidden">
@@ -284,7 +287,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             aria-hidden
             className="pointer-events-none absolute left-0 right-0 top-[10%] z-[5] flex justify-center"
           >
-            <h1
+            <p
               className="hero-tilt-strong whitespace-nowrap font-serif font-black italic drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               style={{
                 fontSize: "clamp(2.75rem, 13vw, 11rem)",
@@ -295,8 +298,8 @@ export function Hero({ ready = false }: { ready?: boolean }) {
                 transformOrigin: "center center",
               }}
             >
-              <SplitText text="RASHID" delay={0.4} ready={ready} />
-            </h1>
+              <SplitText text="RASHID" delay={0.4} />
+            </p>
           </div>
 
           {/* Circle wrapper — full viewport height */}
@@ -314,35 +317,33 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             />
 
             <p
-              className="hero-tilt-mid absolute left-1/2 top-[10%] z-[12] -translate-x-1/2 whitespace-nowrap font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.5em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate-[fadeIn_1400ms_900ms_ease-out_both]"
+              className="hero-tilt-mid absolute left-1/2 top-[10%] z-[12] hidden lg:block whitespace-nowrap font-mono text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.25em] sm:tracking-[0.5em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] animate-[fadeIn_1400ms_900ms_ease-out_both]"
             >
-              Sahiwal, Pakistan · Est. 2026
+              Pakistan · Open to remote work
             </p>
 
             {/* Portrait image — taller to fill viewport */}
-            <motion.div
-              initial={{ opacity: 0, y: 50, scale: 0.95, filter: "blur(12px)" }}
-              animate={ready ? { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" } : { opacity: 0, y: 50, scale: 0.95, filter: "blur(12px)" }}
-              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+            <div
               className="hero-tilt-portrait relative z-[15] w-auto max-w-full"
               style={{ height: "min(88vh, 820px, 125vw)" }}
             >
-              <Image
-                src="/portrait.png"
-                alt="Rashid Yaseen portrait"
-                width={520}
-                height={780}
-                priority
-                className="h-full w-auto object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)]"
-              />
-            </motion.div>
+              {/* Entrance on an inner wrapper so it doesn't fight the tilt transform */}
+              <div className="hero-in h-full" style={enter({ d: 0.3, dur: 1.4, y: "50px", s: 0.95, b: "12px" })}>
+                <Image
+                  src="/portrait.png"
+                  alt="Rashid Yaseen portrait"
+                  width={520}
+                  height={780}
+                  priority
+                  className="h-full w-auto object-contain object-bottom drop-shadow-[0_30px_60px_rgba(0,0,0,0.7)]"
+                />
+              </div>
+            </div>
 
             {/* ─── EMAIL COPY BUTTON — right side of image ─── */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
-              className="hidden md:block absolute md:right-[-9rem] top-[45%] z-[20] -translate-y-1/2"
+            <div
+              className="hero-in hidden md:block absolute md:right-[-9rem] top-[45%] z-[20] -translate-y-1/2"
+              style={enter({ d: 0.9, x: "20px" })}
             >
               <button
                 type="button"
@@ -393,7 +394,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
                   </span>
                 </div>
               </button>
-            </motion.div>
+            </div>
           </div>
 
           {/* YASEEN — bottom */}
@@ -401,7 +402,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
             aria-hidden
             className="pointer-events-none absolute left-0 right-0 bottom-[6%] z-[5] flex justify-center"
           >
-            <h2
+            <p
               className="hero-tilt-strong whitespace-nowrap font-serif font-black italic drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
               style={{
                 fontSize: "clamp(2.75rem, 13vw, 11rem)",
@@ -412,25 +413,21 @@ export function Hero({ ready = false }: { ready?: boolean }) {
                 transformOrigin: "center center",
               }}
             >
-              <SplitText text="YASEEN" delay={0.6} ready={ready} />
-            </h2>
+              <SplitText text="YASEEN" delay={0.6} />
+            </p>
           </div>
 
           {/* Role rotator */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={ready ? { opacity: 1, x: 0 } : { opacity: 0, x: -20 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.7 }}
-            className="hero-tilt-light absolute left-[15%] top-[45%] z-30 hidden md:block"
-          >
+          <div className="hero-tilt-light absolute left-[15%] top-[45%] z-30 hidden md:block">
+          <div className="hero-in" style={enter({ d: 0.7, x: "-20px" })}>
             <p className="font-mono text-[11px] font-bold uppercase tracking-[0.35em] text-white/80 mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
               Currently
             </p>
-            <div className="relative h-8 overflow-hidden">
+            <div className="relative h-8 w-[15rem] overflow-hidden">
               {ROLES.map((role, i) => (
                 <p
                   key={role}
-                  className="font-serif italic text-xl font-bold text-white absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
+                  className="font-serif italic text-xl font-bold text-white whitespace-nowrap absolute inset-0 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]"
                   style={{
                     transform: `translateY(${(i - roleIndex) * 100}%)`,
                     opacity: i === roleIndex ? 1 : 0,
@@ -442,17 +439,16 @@ export function Hero({ ready = false }: { ready?: boolean }) {
               ))}
             </div>
             <span className="mt-3 block h-[2px] w-16 bg-white drop-shadow-[0_0_8px_rgba(255,255,255,0.8)]" />
-          </motion.div>
+          </div>
+          </div>
 
           {/* Tagline — BOTTOM */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={ready ? { opacity: 1, y: 0 } : { opacity: 0, y: 15 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 1.0 }}
-            className="absolute bottom-3 left-1/2 z-20 -translate-x-1/2 max-w-2xl px-6 text-center"
+          <div
+            className="hero-in absolute bottom-3 left-1/2 z-20 -translate-x-1/2 w-full max-w-2xl px-6 text-center"
+            style={enter({ d: 1.0, y: "15px" })}
           >
             <div className="flex items-center justify-center gap-4 flex-wrap">
-              {["Web", "Flutter", "Machine Learning", "DevOps"].map((tag, i) => (
+              {["Machine Learning", "Full-Stack", "AI Systems", "MLOps"].map((tag, i) => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-3 font-sans text-[11px] font-bold uppercase tracking-[0.25em] text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
@@ -462,7 +458,7 @@ export function Hero({ ready = false }: { ready?: boolean }) {
                 </span>
               ))}
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
 
@@ -521,38 +517,19 @@ export function Hero({ ready = false }: { ready?: boolean }) {
   )
 }
 
-function SplitText({ text, delay = 0, ready = false }: { text: string; delay?: number; ready?: boolean }) {
+function SplitText({ text, delay = 0 }: { text: string; delay?: number }) {
   return (
-    <motion.span 
-      className="inline-block"
-      initial="hidden"
-      animate={ready ? "visible" : "hidden"}
-      variants={{
-        hidden: { opacity: 0 },
-        visible: {
-          opacity: 1,
-          transition: { staggerChildren: 0.07, delayChildren: delay }
-        }
-      }}
-    >
+    <span className="inline-block">
       {text.split("").map((ch, i) => (
-        <motion.span
+        <span
           key={i}
-          className="inline-block"
-          variants={{
-            hidden: { opacity: 0, y: "70%", rotate: 8 },
-            visible: { 
-              opacity: 1, 
-              y: "0%", 
-              rotate: 0, 
-              transition: { duration: 1.0, ease: [0.16, 1, 0.3, 1] } 
-            }
-          }}
+          className="hero-in inline-block"
+          style={enter({ d: delay + i * 0.07, y: "70%", r: "8deg" })}
         >
           {ch === " " ? "\u00A0" : ch}
-        </motion.span>
+        </span>
       ))}
-    </motion.span>
+    </span>
   )
 }
 

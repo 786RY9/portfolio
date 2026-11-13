@@ -20,11 +20,11 @@ const VALUES: Value[] = [
     image: "/values/01-quality.jpg",
     tilt: -7,
     description: [
-      { text: "Quality and performance never happen by chance; they " },
-      { text: "define every action we take", bold: true },
-      { text: ". After all, " },
-      { text: "excellence is the only thing", bold: true },
-      { text: " that guarantees our long-term success." },
+      { text: "Quality and performance never happen by chance. I build " },
+      { text: "both the model and the system around it", bold: true },
+      { text: ", and I judge the work by " },
+      { text: "how it holds up once it's running", bold: true },
+      { text: "." },
     ],
   },
   {
@@ -33,26 +33,26 @@ const VALUES: Value[] = [
     image: "/values/02-integrity.jpg",
     tilt: 6,
     description: [
-      { text: "We believe that " },
-      { text: "strong moral principles", bold: true },
-      { text: " must exist in any " },
-      { text: "field of activity", bold: true },
-      { text: ", and the quality of being " },
-      { text: "honest and open with clients", bold: true },
-      { text: " defines us as a company." },
+      { text: "I say " },
+      { text: "what a system can and can't do", bold: true },
+      { text: ", report results " },
+      { text: "honestly", bold: true },
+      { text: ", and stay " },
+      { text: "open with clients and teammates", bold: true },
+      { text: " about trade-offs and problems." },
     ],
   },
   {
     num: "03",
-    title: "Innovation",
+    title: "Curiosity",
     image: "/values/03-innovation.jpg",
     tilt: -6,
     description: [
-      { text: "We don't follow trends, " },
-      { text: "we set them", bold: true },
-      { text: ". Every project is an opportunity to push boundaries, explore " },
+      { text: "Every project is a chance to " },
+      { text: "learn something new", bold: true },
+      { text: ": a sandbox pipeline, a multi-agent design, a new deployment stack. I explore " },
       { text: "new technologies", bold: true },
-      { text: ", and craft solutions that didn't exist yesterday." },
+      { text: ", then keep what actually works." },
     ],
   },
   {
@@ -61,9 +61,9 @@ const VALUES: Value[] = [
     image: "/values/04-velocity.jpg",
     tilt: 7,
     description: [
-      { text: "Speed is a feature. We " },
+      { text: "Speed is a feature. I " },
       { text: "ship fast", bold: true },
-      { text: ", iterate faster, and treat momentum as a competitive advantage — without ever sacrificing the " },
+      { text: " and iterate faster, without sacrificing the " },
       { text: "craft beneath the surface", bold: true },
       { text: "." },
     ],
@@ -173,7 +173,8 @@ export function Values() {
                 slidesRef.current[i] = el
               }}
               className="col-span-12 grid grid-cols-12 items-center gap-6 will-change-transform"
-              style={{ gridColumn: "1 / -1", gridRow: "1 / 2", opacity: 0 }}
+              // First slide visible in the server HTML; the scroll handler takes over on mount.
+              style={{ gridColumn: "1 / -1", gridRow: "1 / 2", opacity: i === 0 ? 1 : 0 }}
             >
               {/* Left: title */}
               <div className="col-span-12 self-start md:col-span-3" style={{ paddingTop: "clamp(2rem, 8vh, 6rem)" }}>

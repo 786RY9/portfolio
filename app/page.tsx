@@ -1,34 +1,29 @@
-"use client"
-
-import { useState } from "react"
-import { Loader } from "@/components/loader"
 import { Hero } from "@/components/hero"
 import { Values } from "@/components/values"
 import { Skills } from "@/components/skills"
-import { Projects } from "@/components/projects"
+import { SelectedProjects } from "@/components/selected-projects"
+import { Experience } from "@/components/experience"
 import { Services } from "@/components/services"
 // import { GithubSection } from "@/components/github-section"
-import { Feedback } from "@/components/feedback"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { Cursor } from "@/components/cursor"
 
+// Server component: every section is server-rendered and visible without waiting
+// for the intro loader (which lives in app/layout.tsx and only overlays the page).
 export default function Page() {
-  const [loading, setLoading] = useState(true)
-
   return (
     <main className="bg-black text-white">
-      {loading && <Loader onFinish={() => setLoading(false)} />}
       <SmoothScroll />
       <Cursor />
-      <Hero ready={!loading} />
+      <Hero />
       <Values />
       <Skills />
-      {/* <Projects /> */}
+      <SelectedProjects />
+      <Experience />
       <Services />
       {/* <GithubSection /> */}
-      {/* <Feedback /> */}
       <Contact />
       <Footer />
     </main>

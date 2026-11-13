@@ -188,8 +188,8 @@ export async function listPosts(
           const coverExists = await getFile(coverPath)
           posts.push({
             slug,
-            type,
             ...stored.meta,
+            type, // folder type is authoritative
             coverUrl: coverExists ? cmsAssetUrl(coverPath) : null,
           })
         } catch {
@@ -217,8 +217,8 @@ export async function fetchPost(type: PostType, slug: string): Promise<Post | nu
     const coverExists = await getFile(coverPath)
     return {
       slug: safe,
-      type,
       ...stored.meta,
+      type, // folder type is authoritative
       coverUrl: coverExists ? cmsAssetUrl(coverPath) : null,
       content: stored.content,
     }

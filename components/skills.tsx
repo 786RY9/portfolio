@@ -10,54 +10,56 @@ type Skill = {
   details: string[]
 }
 
+// Matches the Skills section of Rashid_Yaseen_Resume_ML_Engineer.pdf. Keep the two in sync.
+// The card's small label is the first two letters of `id`.
 const skills: Skill[] = [
   {
-    id: "flutter",
-    title: "Flutter",
-    subtitle: "Cross-platform apps",
-    details: ["Dart", "iOS", "Android", "macOS", "Windows", "Linux", "Web", "Riverpod", "Bloc"],
-  },
-  {
     id: "ml",
-    title: "Machine & Deep Learning",
-    subtitle: "ML / DL Engineering",
-    details: ["Python", "PyTorch", "TensorFlow", "scikit-learn", "Transformers", "CV", "NLP"],
-  },
-  {
-    id: "devops",
-    title: "DevOps",
-    subtitle: "CI / CD & Infra",
-    details: ["Docker", "Kubernetes", "GitHub Actions", "Terraform", "AWS", "Nginx", "Monitoring"],
-  },
-  {
-    id: "python",
-    title: "Python",
-    subtitle: "Backend & scripting",
-    details: ["FastAPI", "Flask", "Django", "asyncio", "Pandas", "NumPy", "Automation"],
-  },
-  {
-    id: "linux",
-    title: "Linux Sysadmin",
-    subtitle: "RHEL & beyond",
-    details: ["RHEL", "systemd", "SELinux", "Bash", "Networking", "Ansible", "Hardening"],
-  },
-  {
-    id: "wordpress",
-    title: "WordPress",
-    subtitle: "CMS & themes",
-    details: ["PHP", "Custom themes", "WooCommerce", "Plugins", "SEO", "Performance"],
+    title: "Machine Learning",
+    subtitle: "Deep learning & computer vision",
+    details: ["Python", "TensorFlow", "PyTorch (basic)", "Image classification", "Imbalanced datasets", "Feature engineering", "Model evaluation"],
   },
   {
     id: "ai",
-    title: "RAG & Agentic AI",
-    subtitle: "LLM systems",
-    details: ["LLMs", "RAG", "Vector DBs", "LangChain", "n8n", "Make", "Agents"],
+    title: "LLMs & Agents",
+    subtitle: "RAG & multi-agent systems",
+    details: ["RAG", "Multi-agent systems", "LangChain", "Bedrock Knowledge Bases", "Google Gemini", "Chroma"],
+  },
+  {
+    id: "ops",
+    title: "MLOps",
+    subtitle: "Pipelines & deployment",
+    details: ["ZenML", "DVC", "Data-drift monitoring", "Model deployment", "Docker", "GitHub Actions"],
+  },
+  {
+    id: "web",
+    title: "Full-Stack",
+    subtitle: "TypeScript & Python",
+    details: ["TypeScript", "Node.js", "Fastify", "FastAPI", "Express", "React", "Next.js", "Vitest / Playwright"],
+  },
+  {
+    id: "db",
+    title: "Data & Databases",
+    subtitle: "PostgreSQL & Prisma",
+    details: ["PostgreSQL", "Prisma", "MySQL", "SQLite", "Redis", "Supabase", "SQLAlchemy", "Alembic"],
+  },
+  {
+    id: "cloud",
+    title: "Cloud & DevOps",
+    subtitle: "AWS & Kubernetes",
+    details: ["AWS", "Oracle Cloud", "Docker", "Kubernetes", "Argo CD", "Jenkins", "Prometheus", "Grafana"],
+  },
+  {
+    id: "mobile",
+    title: "Mobile & Desktop",
+    subtitle: "Cross-platform apps",
+    details: ["Flutter", "Dart", "React Native (Expo)", "Supabase"],
   },
   {
     id: "security",
-    title: "Cyber Security",
-    subtitle: "Penetration testing",
-    details: ["Recon", "Burp Suite", "Nmap", "Metasploit", "OWASP", "Linux pentest", "Hardening"],
+    title: "Security & Linux",
+    subtitle: "Malware analysis & sysadmin",
+    details: ["Malware analysis", "CAPEv2 sandboxing", "Hack The Box", "TCM Security", "Linux administration", "Bash", "SSH"],
   },
 ]
 
